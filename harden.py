@@ -14,5 +14,5 @@ def install_packages(self):
         self.color.print_blue("\t[+] Package [{}] Installed".format(str(self.items)))
 
 
-# if __name__ == '__main__':
-#     self.install_packages(self)
+if __name__ == '__main__':
+    self.install_packages(self)
