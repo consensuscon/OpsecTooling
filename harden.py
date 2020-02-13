@@ -18,7 +18,7 @@ def configure_node_exporter():
     make_node_user.wait()
     get_node_exporter = subprocess.Popen('wget https://github.com/prometheus/node_exporter/releases/download/v0.18.1/node_exporter-0.18.1.linux-amd64.tar.gz && tar xvf node_exporter-0.18.1.linux-amd64.tar.gz && cd node_exporter-0.18.1.linux-amd64',
                                           shell=True, stdin=None, executable="/bin/bash")
-    os.chdir("node_exporter-0.18.1.linux-amd64")
+    os.chdir("/home/sysadmin/node_exporter-0.18.1.linux-amd64")
     get_node_exporter.wait()
     set_permissions = subprocess.Popen('cp node_exporter /usr/local/bin && chown node_exporter:node_exporter /usr/local/bin/node_exporter',
                                         shell=True, stdin=None, executable="/bin/bash")
