@@ -1,0 +1,11 @@
+2019-12-15 - Snort 2.9.15.1
+
+[*] New Additions
+
+ * Added support for glibc version 2.30.
+
+[*] Improvements / Fix
+
+ * Fixed snort core seen during ssl re-configuration.
+
+ * Fixed file access issues on files from SMB share.
