@@ -15,4 +15,4 @@ def install_packages(self):
 
 
 if __name__ == '__main__':
-    self.install_packages()
+    self.install_packages(self)
