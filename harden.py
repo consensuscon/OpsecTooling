@@ -8,7 +8,5 @@ packages = ["fail2ban", "clamp", "clamav-daemon", "debsums", "aide", "libpam-cra
              "flex", "libnetd"]
 
 for package in packages:
-    try:
-        subprocess.Popen('sudo apt-get install -y ' + package, shell=True, stdin=None, xecutable="/bin/bash")
-    except CalledProcessError as e:
-        print(e.output)
+    process = subprocess.Popen('sudo apt-get install -y ' + package, shell=True, stdin=None, xecutable="/bin/bash")
+    process.wait()
