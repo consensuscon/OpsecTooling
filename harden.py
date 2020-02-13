@@ -9,5 +9,5 @@ packages = ["fail2ban", "clamp", "clamav-daemon", "debsums", "aide", "libpam-cra
 for package in packages:
     try:
         check_call(['sudo apt-get', 'install', '-y', package], stdout=open(os.homesysadmin, 'wb'))
-    except: CaledProcessError as e:
+    except CaledProcessError as e:
         print(e.output)
