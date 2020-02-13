@@ -1,6 +1,7 @@
 from subprocess import check_call, CalledProcessError
 import os
 
+os.chdir("/home/sysadmin/")
 packages = ["fail2ban", "clamp", "clamav-daemon", "debsums", "aide", "libpam-cracklib",
             "acct", "sysstat", "auditd", "gcc", "libpcre3-dev", "zliblg-dev", "libluajit-5.1-dev",
              "libpcap-dev", "openssl", "libssl-dev", "libnghttp2-dev", "libdumbnet-dev", "bison", 
@@ -8,6 +9,6 @@ packages = ["fail2ban", "clamp", "clamav-daemon", "debsums", "aide", "libpam-cra
 
 for package in packages:
     try:
-        check_call(['sudo apt-get', 'install', '-y', package], stdout=open(os.homesysadmin, 'wb'))
+        subprocess.Popen(['sudo apt-get install -y' + package], shell=True, stdin=None, xecutable="/bin/bash")
     except CalledProcessError as e:
         print(e.output)
