@@ -80,7 +80,7 @@ def configure_snort():
         process.wait()
 
     oinkcode = "6516162aed201f2eb4fb2c6865065151a067722a"
-    get_rules=subprocess.Popen("wget https://www.snort.org/rules/snortrules-snapshot-29120.tar.gz?oinkcode=" + oinkcode + " -O ~/registered.tar.gz && tar -xvf ~/registered.tar.gz -C /etc/snort", shell=True, stdin=None, executable="/bin/bash"))
+    get_rules=subprocess.Popen("wget https://www.snort.org/rules/snortrules-snapshot-29120.tar.gz?oinkcode=" + oinkcode + " -O ~/registered.tar.gz && tar -xvf ~/registered.tar.gz -C /etc/snort", shell=True, stdin=None, executable="/bin/bash")
     get_rules.wait()
     print('config done!')
     # snort_config('ldconfig && ln -s /usr/loca/bin/snort /usr/sbin/snort && grouped snort')
