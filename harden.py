@@ -55,7 +55,7 @@ def configure_snort():
     build_daq_binaries.wait()
 
     os.chdir("/home/sysadmin/OpsecTooling/snort/snort-2.9.15.1")
-    build_snort_binaries = subprocess.Popen('./configure -—enable-sourcefire && make && make install', shell=True, stdin=None, executable="/bin/bash")
+    build_snort_binaries = subprocess.Popen(' ./configure --enable-sourcefire && make && sudo make install', shell=True, stdin=None, executable="/bin/bash")
     build_snort_binaries.wait()
 
     # snort_config('ldconfig && ln -s /usr/loca/bin/snort /usr/sbin/snort && grouped snort')
