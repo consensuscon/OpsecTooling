@@ -58,7 +58,7 @@ def configure_snort():
 
     dpgkg_binaries = subprocess.Popen('tar xvzf daq-2.0.6.tar.gz && tar xvzf snort-2.9.15.1.tar.gz', shell=True, stdin=None, executable="/bin/bash")
     dpgkg_binaries.wait()
-    
+
     os.chdir("/home/sysadmin/OpsecTooling/snort/daq-2.0.6")
     build_daq_binaries = subprocess.Popen('./configure && make && make install', shell=True, stdin=None, executable="/bin/bash")
     build_daq_binaries.wait()
@@ -67,6 +67,18 @@ def configure_snort():
     build_snort_binaries = subprocess.Popen(' ./configure && make && sudo make install', shell=True, stdin=None, executable="/bin/bash")
     build_snort_binaries.wait()
 
+    commands = ["ldconfig", "ln -s /usr/loca/bin/snort /usr/sbin/snort", "groupadd snort",
+                "useradd snort -r -s /sbin/nologin -c SNORT_IDS -g snort", "mkdir -p /etc/snort/rules",
+                "mkdir /var/log/snort", "mkdir /usr/local/lib/snort_dynamicrules", "chmod -R 5775 /etc/snort",
+                "chmod -R 5775 /var/lib/snort", "chmod -R 5775 /usr/local/lib/snort_dynamicrules", "chown -R snort:snort /etc/snort",
+                "chown -R snort:snort /var/log/snort", "chown -R snort:snort /usr/local/lib/snort_dynamicrules", 
+                "touch /etc/snort/rules/white_list.rules", "touch /etc/snort/rules/blackl_list.rules", "touch /etc/snort/rules/local.rules",
+                "cp ~/snort/snort-2.9.15.1/etc/*.conf* /etc/snort", "cp  ~/snort/snort-2.9.15.1/etc/*.map /etc/snort"]
+
+    for command in commands:
+        process = subprocess.Popen(command, hell=True, stdin=None, executable="/bin/bash")
+        process.wait()
+    print('config done!')
     # snort_config('ldconfig && ln -s /usr/loca/bin/snort /usr/sbin/snort && grouped snort')
 
 if __name__=="__main__":
