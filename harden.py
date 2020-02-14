@@ -89,7 +89,7 @@ def configure_snort():
         content = f.readlines()
         print(content)
         for line in content:
-        print(line)
+            print(line)
 
     f.close()
 
