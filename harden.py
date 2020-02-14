@@ -85,7 +85,7 @@ def configure_snort():
     # get_rules.wait()
 
     os.chdir("/etc/snort/")
-    f = open("snort.conf", "w+")
+    # f = open("snort.conf", "w+")
     get_attr = subprocess.Popen("grep ^ipvar /etc/snort/snort.conf ", shell=True, stdin=None, executable="/bin/bash")
     get_attr.wait()
              
