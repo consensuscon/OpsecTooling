@@ -86,7 +86,9 @@ def configure_snort():
 
     os.chdir("/etc/snort/")
     f = open("snort.conf", "w+")
-    for line in f.readlines():
+    content = f.readlines()
+    print(content)
+    for line in content:
         print(line)
 
     f.close()
