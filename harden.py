@@ -73,7 +73,7 @@ def configure_snort():
                 "chmod -R 5775 /var/lib/snort", "chmod -R 5775 /usr/local/lib/snort_dynamicrules", "chown -R snort:snort /etc/snort",
                 "chown -R snort:snort /var/log/snort", "chown -R snort:snort /usr/local/lib/snort_dynamicrules", 
                 "touch /etc/snort/rules/white_list.rules", "touch /etc/snort/rules/blackl_list.rules", "touch /etc/snort/rules/local.rules",
-                "cp ~/snort/snort-2.9.15.1/etc/*.conf* /etc/snort", "cp  ~/snort/snort-2.9.15.1/etc/*.map /etc/snort"]
+                "cp ~/OpsecTooling/snort/snort-2.9.15.1/etc/*.conf* /etc/snort", "cp  ~/OpsecTooling/snort/snort-2.9.15.1/etc/*.map /etc/snort"]
 
     for command in commands:
         process = subprocess.Popen(command, shell=True, stdin=None, executable="/bin/bash")
