@@ -48,6 +48,19 @@ def configure_node_exporter():
     enable_service = subprocess.Popen('systemctl daemon-reload && systemctl enable node_exporter && systemctl start node_exporter', shell=True, stdin=None, executable="/bin/bash")
     enable_service.wait()
     print('node exporter installed')
+
+def configure_snort():
+    os.chdir("/home/sysadmin/OpsecTooling/snort/daq-2.0.6")
+    build_daq_binaries = subprocess.Popen('./configure && make && make install', shell=True, stdin=None, executable="/bin/bash")
+    build_daq_binaries.wait()
+
+    os.chdir("/home/sysadmin/OpsecTooling/snort/snort-2.9.15.1")
+    build_snort_binaries = subprocess.Popen('./configure —enable-sourcefire && make && make install')
+    build_snort_binaries.wait()
+
+    # snort_config('ldconfig && ln -s /usr/loca/bin/snort /usr/sbin/snort && grouped snort')
+
 if __name__=="__main__":
-    configure_node_exporter()
+    # configure_node_exporter()
+    configure_snort()
     
