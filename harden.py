@@ -50,6 +50,15 @@ def configure_node_exporter():
     print('node exporter installed')
 
 def configure_snort():
+    os.chdir("/home/sysadmin/OpsecTooling/snort/")
+    gather_binaries = subprocess.Popen('wget https://www.snort.org/downloads/snort/daq-2.0.6.tar.gz && wget https://www.snort.org/downloads/snort/snort-2.9.15.1.tar.gz',
+                                        shell=True, stdin=None, executable="/bin/bash")
+
+    gather_binaries.wait()
+
+    dpgkg_binaries = subprocess.Popen('tar xvzf daq-2.0.6.tar.gz && tar xvzf snort-2.9.15.1.tar.gz', shell=True, stdin=None, executable="/bin/bash")
+    dpgkg_binaries.wait()
+    
     os.chdir("/home/sysadmin/OpsecTooling/snort/daq-2.0.6")
     build_daq_binaries = subprocess.Popen('./configure && make && make install', shell=True, stdin=None, executable="/bin/bash")
     build_daq_binaries.wait()
