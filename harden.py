@@ -91,7 +91,7 @@ def configure_snort():
     conf = "/etc/snort/snort.conf"
     cfg = configparser.ConfigParser()
     cfg.read(conf)
-    cfg.sections()
+    print 'getoptionslist():', cfg.getoptionslist()
     # string = con
     # get_attr = subprocess.Popen("mv " + file1 + " " + file2 + " && cat " + 
     #                             file2 + " | grep -v ^$ipvar$any > " + file1 + 
