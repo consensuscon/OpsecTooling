@@ -97,6 +97,7 @@ def configure_snort():
     print('config done!')
 
 if __name__=="__main__":
-    # configure_node_exporter()
+    install_deps()
+    configure_node_exporter()
     configure_snort()
     
