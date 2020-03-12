@@ -3,7 +3,7 @@ import os
 import re
 
 def install_deps():
-    os.chdir("/home/sysadmin/")
+    os.chdir("/home/ubuntu/")
     packages = ["fail2ban", "clamp", "clamav-daemon", "debsums", "aide", "libpam-cracklib",
                 "acct", "sysstat", "auditd", "gcc", "libpcre3-dev", "zliblg-dev", "libluajit-5.1-dev",
                 "libpcap-dev", "openssl", "libssl-dev", "libnghttp2-dev", "libdumbnet-dev", "bison", 
@@ -15,17 +15,17 @@ def install_deps():
 
 def configure_node_exporter():
     server = "172.31.18.149"
-    os.chdir("/home/sysadmin/")
+    os.chdir("/home/ubuntu/")
     make_node_user = subprocess.Popen('useradd --no-create-home --shell /bin/false node_exporter', shell=True, stdin=None, executable="/bin/bash")
     make_node_user.wait()
     get_node_exporter = subprocess.Popen('wget https://github.com/prometheus/node_exporter/releases/download/v0.18.1/node_exporter-0.18.1.linux-amd64.tar.gz && tar xvf node_exporter-0.18.1.linux-amd64.tar.gz && cd node_exporter-0.18.1.linux-amd64',
                                           shell=True, stdin=None, executable="/bin/bash")
     get_node_exporter.wait()
-    os.chdir("/home/sysadmin/node_exporter-0.18.1.linux-amd64")
+    os.chdir("/home/ubuntu/node_exporter-0.18.1.linux-amd64")
     set_permissions = subprocess.Popen('cp node_exporter /usr/local/bin && chown node_exporter:node_exporter /usr/local/bin/node_exporter',
                                         shell=True, stdin=None, executable="/bin/bash")
     set_permissions.wait()
-    os.chdir("/home/sysadmin/")
+    os.chdir("/home/ubuntu/")
     clean_up = subprocess.Popen('rm -rf node_exporter-0.18.1.linux-amd64 node_exporter-0.18.1.linux-amd64.tar.gz', shell=True, stdin=None, executable="/bin/bash")
     clean_up.wait()
     os.chdir("/etc/systemd/system/")
@@ -51,7 +51,7 @@ def configure_node_exporter():
     print('node exporter installed')
 
 def configure_snort():
-    os.chdir("/home/sysadmin/OpsecTooling/snort/")
+    os.chdir("/home/ubuntu/OpsecTooling/snort/")
     gather_binaries = subprocess.Popen('wget https://www.snort.org/downloads/snort/daq-2.0.6.tar.gz && wget https://www.snort.org/downloads/snort/snort-2.9.15.1.tar.gz',
                                         shell=True, stdin=None, executable="/bin/bash")
 
@@ -60,11 +60,11 @@ def configure_snort():
     dpgkg_binaries = subprocess.Popen('tar xvzf daq-2.0.6.tar.gz && tar xvzf snort-2.9.15.1.tar.gz', shell=True, stdin=None, executable="/bin/bash")
     dpgkg_binaries.wait()
 
-    os.chdir("/home/sysadmin/OpsecTooling/snort/daq-2.0.6")
+    os.chdir("/home/ubuntu/OpsecTooling/snort/daq-2.0.6")
     build_daq_binaries = subprocess.Popen('./configure && make && make install', shell=True, stdin=None, executable="/bin/bash")
     build_daq_binaries.wait()
 
-    os.chdir("/home/sysadmin/OpsecTooling/snort/snort-2.9.15.1")
+    os.chdir("/home/ubuntu/OpsecTooling/snort/snort-2.9.15.1")
     build_snort_binaries = subprocess.Popen(' ./configure && make && sudo make install', shell=True, stdin=None, executable="/bin/bash")
     build_snort_binaries.wait()
 
@@ -86,7 +86,11 @@ def configure_snort():
 
     os.chdir("/etc/snort/")
     # f = open("snort.conf", "w+")
-    get_attr = subprocess.Popen("grep ^ipvar /etc/snort/snort.conf ", shell=True, stdin=None, executable="/bin/bash")
+    file1 = "/etc/snort/snort.conf"
+    file2 = "/etc/snort/snort2.conf"
+    get_attr = subprocess.Popen("mv " + file1 + " " + file2 + " && cat " + 
+                                file2 + " | grep -v ^$ipvar$any > " + file1 + 
+                                " && echo ", shell=True, stdin=None, executable="/bin/bash")
     get_attr.wait()
              
     
