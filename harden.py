@@ -1,6 +1,7 @@
 import subprocess
 import os
 import re
+import configparser
 
 def install_deps():
     os.chdir("/home/ubuntu/")
@@ -86,18 +87,22 @@ def configure_snort():
 
     os.chdir("/etc/snort/")
     # f = open("snort.conf", "w+")
-    file1 = "/etc/snort/snort.conf"
-    file2 = "/etc/snort/snort2.conf"
-    get_attr = subprocess.Popen("mv " + file1 + " " + file2 + " && cat " + 
-                                file2 + " | grep -v ^$ipvar$any > " + file1 + 
-                                " && echo ", shell=True, stdin=None, executable="/bin/bash")
-    get_attr.wait()
+
+    conf = "/etc/snort/snort.conf"
+    cfg = configparser.ConfigParser()
+    cfg.read(conf)
+    cfg.sections()
+    # string = con
+    # get_attr = subprocess.Popen("mv " + file1 + " " + file2 + " && cat " + 
+    #                             file2 + " | grep -v ^$ipvar$any > " + file1 + 
+    #                             " && echo ", shell=True, stdin=None, executable="/bin/bash")
+    # get_attr.wait()
              
     
     print('config done!')
 
 if __name__=="__main__":
-    install_deps()
-    configure_node_exporter()
+    # install_deps()
+    # configure_node_exporter()
     configure_snort()
     
